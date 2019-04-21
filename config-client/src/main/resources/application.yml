@@ -1,0 +1,29 @@
+server:
+  port: 8771
+
+spring:
+  application:
+    name: config-client
+  zipkin:
+    base-url: http://172.30.3.58:9411
+#  sleuth:
+#    sampler:
+#      probability: 1
+
+#  cloud:
+#    config:
+#      uri: http://172.30.3.58:8770/
+#      profile: dev
+#      label: master
+#  cloud:
+#    config:
+#      uri: http://172.30.3.58:8770/
+#      profile: dev
+#      label: master
+#      discovery:
+#        enabled: true
+#        service-id: config-client
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

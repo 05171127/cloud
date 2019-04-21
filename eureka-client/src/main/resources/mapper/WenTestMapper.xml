@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunlong.cloud.eurekaclient.mapper.WenTestMapper" >
+  <resultMap id="BaseResultMap" type="com.sunlong.cloud.eurekaclient.dto.WenTest" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="ev" property="ev" jdbcType="INTEGER" />
+    <result column="event_id" property="eventId" jdbcType="VARCHAR" />
+    <result column="event_name" property="eventName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  
+  <select id="getAll" resultType="com.sunlong.cloud.eurekaclient.dto.WenTest" parameterType="java.util.Map" >
+    SELECT
+		id AS id,
+		ev AS ev,
+		event_id AS eventId,
+		event_name AS eventName
+	FROM
+		wen_test
+  </select>
+
+</mapper>

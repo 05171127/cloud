@@ -1,0 +1,58 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8765
+spring:
+  application:
+    name: service-feign
+#  zipkin:
+#    base-url: http://172.30.3.58:9411
+#  sleuth:
+#    sampler:
+#      probability: 1
+
+feign:
+  hystrix:
+    enabled: true
+#  client:
+#    config:
+#      hi:
+#        connectTimeout: 5000
+#        readTimeout: 5000
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        requestVolumeThreshold: 5
+#       为什么这个地方配置的requestVolumeThreshold没用 好像就是三次不行就不管了
+#        forceClosed: true
+        sleepWindowInMilliseconds: 20000
+      execution:
+#        timeout:
+#          enable: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 121000
+    "FeignService#sayHiFromClientOne(String)":
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 240000
+  threadpool:
+    default:
+      coreSize: 10 #并发执行的最大线程数，默认10
+      maximumSize: 20
+      maxQueueSize: 20 #BlockingQueue的最大队列数，默认值-1
+      queueSizeRejectionThreshold: 20 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝，默认值5
+      allowMaximumSizeToDivergeFromCoreSize: true
+#
+
+ribbon:
+  ReadTimeout: 4000
+  ConnectTimeout: 30000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+# 如果没有设置MaxAutoRetries，则默认是MaxAutoRetriesNextServer/2
+# 如果是没有设置MaxAutoRetriesNextServer，单独设置MaxAutoRetries 则单个服务尝试次数 = MaxAutoRetries + 1

@@ -1,0 +1,18 @@
+server:
+  port: 8762
+
+spring:
+  application:
+    name: hi
+#  zipkin:
+#    base-url: http://172.30.3.58:9411
+#  sleuth:
+#    sampler:
+#      probability: 1
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}

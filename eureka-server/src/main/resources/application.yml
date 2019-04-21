@@ -1,0 +1,25 @@
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: localhost
+#    prefer-ip-address: false
+
+#在默认设置下，该服务注册中心也会将自己作为客户端来尝试注册它自己，所以我们需要禁用它的客户端注册行为
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#      defaultZone: http://localhost1:8760/eureka/,http://localhost2:8759/eureka/
+#  eureka.server.enable-self-preservation=false
+  server:
+    enable-self-preservation: false
+
+interface:
+  secure:
+    key: DB7BAD2723F340158009B0C68612CF79
+
+spring:
+  application:
+    name: eureka-server

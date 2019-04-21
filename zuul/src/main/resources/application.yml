@@ -1,0 +1,55 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8769
+spring:
+  application:
+    name: service-zuul
+#  zipkin:
+#    base-url: http://172.30.3.58:9411
+#  cloud:
+#    loadbalancer:
+#      retry:
+#        enabled: true
+#  sleuth:
+#    sampler:
+#      probability: 1
+zuul:
+  routes:
+    api-a:
+      path: /hi/**
+      serviceId: hi
+  retryable: true
+#  host:
+#    socket-timeout-millis:
+
+
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        requestVolumeThreshold: 3
+        #       为什么这个地方配置的requestVolumeThreshold没用 好像就是三次不行就不管了
+        #        forceClosed: true
+        sleepWindowInMilliseconds: 20000
+      execution:
+#        timeout:
+#          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 230000
+
+#ribbon:
+#  ReadTimeout: 2200
+#  ConnectTimeout: 30000
+##  maxAutoRetries: 2
+#  MaxAutoRetriesNextServer: 1
+#  OkToRetryOnAllOperations: true
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+feign:
+  hystrix:
+    enabled: true

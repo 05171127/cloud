@@ -1,0 +1,47 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8764
+spring:
+  application:
+    name: service-ribbon
+  zipkin:
+    base-url: http://172.30.3.58:9411
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+#  sleuth:
+#    sampler:
+#      probability: 1
+
+
+
+hystrix:
+  command:
+    default:
+      circuitBreaker:
+        requestVolumeThreshold: 10
+        #       为什么这个地方配置的requestVolumeThreshold没用 好像就是三次不行就不管了
+        #        forceClosed: true
+        sleepWindowInMilliseconds: 20000
+      execution:
+        #        timeout:
+        #          enable: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 8000
+#
+ribbon:
+  ReadTimeout: 2000
+  ConnectTimeout: 30000
+#  maxAutoRetries: 1
+#  MaxAutoRetriesNextServer: 3
+#  eureka:
+#    enable: true
+
+#feign:
+#  hystrix:
+#    enabled: true

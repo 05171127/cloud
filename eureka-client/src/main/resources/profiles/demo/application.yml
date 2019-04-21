@@ -1,0 +1,70 @@
+server:
+  port: 8262
+
+spring:
+  application:
+    name: hi
+  zipkin:
+    base-url: http://172.30.3.58:9411
+  redis:
+    cluster:
+      nodes: 172.30.3.119:7000,172.30.3.119:7001,172.30.3.119:7002
+      max-redirects: 3
+    password: jollytest
+    timeout: 1000ms
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://172.30.3.190:3306/test?characterEncoding=utf8&useSSL=false&allowMultiQueries=true
+    username: dev_root
+    password: dev_root
+    driver-class-name: com.mysql.jdbc.Driver
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    druid:
+#      driver-class-name: com.mysql.jdbc.Driver
+#      url: jdbc:mysql://172.30.3.190:3306/test?characterEncoding=utf8&useSSL=false&allowMultiQueries=true
+#      username: dev_root
+#      password: dev_root
+#      initial-size: 5
+#      min-idle: 5
+#      max-active: 20
+#      max-wait: 60000
+#      time-between-eviction-runs-millis: 60000
+#      min-evictable-idle-time-millis: 300000
+#      validation-query: SELECT 1 FROM DUAL
+#      test-while-idle: true
+#      test-on-borrow: false
+#      test-on-return: false
+#      pool-prepared-statements: true
+#      max-pool-prepared-statement-per-connection-size: 20
+#      filters: stat,log4j
+#      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+
+#  sleuth:
+#    sampler:
+#      probability: 1
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: com.sunlong.cloud.eurekaclient
+
